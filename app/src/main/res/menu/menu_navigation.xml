@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/menu_item_tabs">
+        <menu>
+            <item
+                android:id="@+id/menu_converter"
+                android:title="@string/menu_item_Converter"
+                android:icon="@mipmap/ic_calculator"/>
+
+            <item
+                android:id="@+id/menu_saved"
+                android:title="@string/menu_item_Saved"
+                android:icon="@mipmap/ic_content_save"/>
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_item_setting">
+        <menu>
+            <item
+                android:id="@+id/menu_style"
+                android:title="@string/menu_item_Style"
+                android:icon="@mipmap/ic_settings"/>
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_item_information">
+        <menu>
+            <item
+                android:id="@+id/menu_information"
+                android:title="@string/information"
+                android:icon="@mipmap/ic_information_outline"/>
+        </menu>
+    </item>
+</menu>

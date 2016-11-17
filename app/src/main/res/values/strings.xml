@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">" CurrencyConverter"</string>
+    <string name="view_navigation_open">Open</string>
+    <string name="view_navigation_close">Close</string>
+
+    <string name="menu_item_Converter">Converter</string>
+    <string name="menu_item_Saved">Saved</string>
+    <string name="menu_item_Style">Style</string>
+    <string name="menu_item_setting">Settings</string>
+    <string name="menu_item_tabs">TAbs</string>
+    <string name="menu_item_information">Information</string>
+    <string name="information">About Currency Converter</string>
+    <string name="ok">button_ok</string>
 </resources>

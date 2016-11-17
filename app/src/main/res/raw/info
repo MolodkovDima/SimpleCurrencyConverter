@@ -1,0 +1,7 @@
+Currency Converter 1.0
+developer: Dimka M.
+App shows:
+- work with tabs, Fragment, DialogFragment, NavigationView.
+- read file .txt;
+- work with styles;
+- work with the database, SharedPreferences;

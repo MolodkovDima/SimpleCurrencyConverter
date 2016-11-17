@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar"/>
-
     <style name="AppGreen" parent="AppTheme">
         <item name="colorPrimary">@color/colorPrimaryGreen</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkGreen</item>
         <item name="colorControlNormal">@color/colorWhite</item>
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="AppBlue" parent="AppTheme">
         <item name="colorPrimary">@color/colorPrimaryBlue</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkBlue</item>
         <item name="colorControlNormal">@color/colorWhite</item>
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="AppOrange" parent="AppTheme">
         <item name="colorPrimary">@color/colorPrimaryOrange</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkOrange</item>
         <item name="colorControlNormal">@color/colorWhite</item>
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
 
 </resources>
