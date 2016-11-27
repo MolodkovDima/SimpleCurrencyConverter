@@ -11,7 +11,7 @@ import com.example.dimka.currencyconverter.R;
 
 public class SavedFragment extends AbstractTabFragment {
 
-    private static final int  LAYOUT = R.layout.fragment_example;
+    private static final int  LAYOUT = R.layout.fragment_saved;
     private Context context;
     private View view;
 

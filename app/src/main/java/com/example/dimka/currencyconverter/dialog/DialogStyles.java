@@ -69,6 +69,7 @@ public class DialogStyles extends DialogFragment {
     }
 
     private void restartActivity(int post){
+        db.close();
         if (post >= 0 || styles.getPosition() != post){
             Intent intent = new Intent(getActivity(), getActivity().getClass());
             getActivity().finish();

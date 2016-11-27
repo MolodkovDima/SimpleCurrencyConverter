@@ -1,4 +1,4 @@
-package com.example.dimka.currencyconverter;
+package com.example.dimka.currencyconverter.parser;
 
 
 import android.content.Context;

@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import com.example.dimka.currencyconverter.adapter.TabsFragmentAdapter;
 import com.example.dimka.currencyconverter.dialog.DialogInformation;
 import com.example.dimka.currencyconverter.dialog.DialogStyles;
+import com.example.dimka.currencyconverter.parser.ReadInformation;
+import com.example.dimka.currencyconverter.parser.ReadJSON;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         styles.setContext(this);
+        ReadJSON.setContext(this);
         setTheme(styles.styleType());
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity
         viewPager.setAdapter(adapter);
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        assert tabLayout != null;
         tabLayout.setupWithViewPager(viewPager);
     }
 
@@ -90,6 +94,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(this);
     }
 
