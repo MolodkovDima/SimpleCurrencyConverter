@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
-import com.example.dimka.currencyconverter.ChangeStyles;
+import com.example.dimka.currencyconverter.style.ChangeStyles;
 import com.example.dimka.currencyconverter.R;
 import com.example.dimka.currencyconverter.database.DB;
 
@@ -57,7 +57,7 @@ public class DialogStyles extends DialogFragment {
                 ListView lv = ((AlertDialog) dialog).getListView();
                 if (which == Dialog.BUTTON_POSITIVE) {
                     Log.d("myLog", "pos = " + lv.getCheckedItemPosition());
-                    styles = new ChangeStyles();
+                    styles = new ChangeStyles(getActivity());
                     styles.setPosition(lv.getCheckedItemPosition());
                     restartActivity(lv.getCheckedItemPosition());
                 } else {
@@ -68,18 +68,17 @@ public class DialogStyles extends DialogFragment {
         return builder.create();
     }
 
-    private void restartActivity(int post){
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
         db.close();
+    }
+
+    private void restartActivity(int post){
         if (post >= 0 || styles.getPosition() != post){
             Intent intent = new Intent(getActivity(), getActivity().getClass());
             getActivity().finish();
             getActivity().startActivity(intent);
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        db.close();
     }
 }

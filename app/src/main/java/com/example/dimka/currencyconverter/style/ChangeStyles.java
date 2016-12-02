@@ -1,15 +1,21 @@
-package com.example.dimka.currencyconverter;
+package com.example.dimka.currencyconverter.style;
 
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.dimka.currencyconverter.R;
+
 public class ChangeStyles {
 
-    private static Context context;
+    private final static String SAVED_POST = "saved_post";
+    private Context context;
     private int typeOfStyle;
-    final static String SAVED_POST = "saved_post";
     private static SharedPreferences preferences;
+
+    public ChangeStyles(Context context) {
+        this.context = context;
+    }
 
     public void setPosition(int position) {
         if(position >= 0){
@@ -42,9 +48,5 @@ public class ChangeStyles {
                 break;
         }
         return typeOfStyle;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
     }
 }

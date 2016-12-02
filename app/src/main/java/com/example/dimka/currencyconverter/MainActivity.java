@@ -14,14 +14,14 @@ import android.view.MenuItem;
 import com.example.dimka.currencyconverter.adapter.TabsFragmentAdapter;
 import com.example.dimka.currencyconverter.dialog.DialogInformation;
 import com.example.dimka.currencyconverter.dialog.DialogStyles;
-import com.example.dimka.currencyconverter.parser.ReadInformation;
-import com.example.dimka.currencyconverter.parser.ReadJSON;
+import com.example.dimka.currencyconverter.readers.InformationReader;
+import com.example.dimka.currencyconverter.style.ChangeStyles;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final int LAYOUT = R.layout.main;
-    private ChangeStyles styles = new ChangeStyles();
+    private ChangeStyles styles;
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ViewPager viewPager;
@@ -29,8 +29,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        styles.setContext(this);
-        ReadJSON.setContext(this);
+        styles = new ChangeStyles(this);
         setTheme(styles.styleType());
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
@@ -59,9 +58,8 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.menu_information:
                 FragmentManager managerInfo = getSupportFragmentManager();
-                ReadInformation readInformation = new ReadInformation();
-                readInformation.setContext(getApplicationContext());
-                DialogInformation info = DialogInformation.newInstance(readInformation.read());
+                InformationReader informationReader = new InformationReader(getApplicationContext());
+                DialogInformation info = DialogInformation.newInstance(informationReader.read());
                 info.show(managerInfo, "information");
                 break;
         }

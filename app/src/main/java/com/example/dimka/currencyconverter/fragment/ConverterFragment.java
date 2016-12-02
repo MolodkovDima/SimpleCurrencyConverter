@@ -8,10 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.dimka.currencyconverter.CurrencyRates;
 import com.example.dimka.currencyconverter.R;
-import com.example.dimka.currencyconverter.parser.ReadJSON;
+import com.example.dimka.currencyconverter.database.DB;
+import com.example.dimka.currencyconverter.readers.JSONReader;
+import com.example.dimka.currencyconverter.readers.MyXMLReader;
 
 import java.util.LinkedList;
+import java.util.concurrent.ExecutionException;
 
 public class ConverterFragment extends AbstractTabFragment {
 
@@ -25,8 +29,6 @@ public class ConverterFragment extends AbstractTabFragment {
     private TextView tv_eur_sell;
     private TextView tv_rub_buy;
     private TextView tv_rub_sell;
-    private ReadJSON readJSON;
-
 
     public static ConverterFragment getInstance(Context context) {
         Bundle args = new Bundle();
@@ -35,6 +37,10 @@ public class ConverterFragment extends AbstractTabFragment {
         fragment.setContext(context);
         fragment.setTitle(context.getString(R.string.menu_item_Converter));
         return fragment;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     @Nullable
@@ -48,7 +54,7 @@ public class ConverterFragment extends AbstractTabFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        tv_date = (TextView) view.findViewById(R.id.tv_date1);
+        tv_date = (TextView) view.findViewById(R.id.tv_date);
         tv_bank = (TextView) view.findViewById(R.id.tv_bank);
         tv_usd_buy = (TextView) view.findViewById(R.id.tv_usd_buy);
         tv_usd_sell = (TextView) view.findViewById(R.id.tv_usd_sell);
@@ -60,31 +66,39 @@ public class ConverterFragment extends AbstractTabFragment {
     }
 
     private void initData() {
-        readJSON = new ReadJSON();
-        readJSON.readJson();
-        tv_date.setText(readJSON.getDate());
-        tv_bank.setText(readJSON.getBank());
-        LinkedList<LinkedList<String>> datas = new LinkedList<LinkedList<String>>();
-        LinkedList<String> usd = new LinkedList<>();
-        LinkedList<String> eur = new LinkedList<>();
-        LinkedList<String> rub = new LinkedList<>();
-        datas = readJSON.getDatas();
+        readXML();
+        final JSONReader reader = new JSONReader(getActivity());
+        final CurrencyRates currencyRates = reader.readJson();
+
+        tv_date.setText(tv_date.getText() + " " + currencyRates.getDate());
+        tv_bank.setText(currencyRates.getBank());
+        LinkedList<LinkedList<Float>> datas = new LinkedList<LinkedList<Float>>();
+        LinkedList<Float> usd = new LinkedList<>();
+        LinkedList<Float> eur = new LinkedList<>();
+        LinkedList<Float> rub = new LinkedList<>();
+        datas = currencyRates.getDatas();
         usd.addAll(datas.get(0));
         eur.addAll(datas.get(1));
         rub.addAll(datas.get(2));
 
-        tv_usd_buy.setText(usd.get(0));
-        tv_usd_sell.setText(usd.get(1));
-        tv_eur_buy.setText(eur.get(0));
-        tv_eur_sell.setText(eur.get(1));
-        tv_rub_buy.setText(rub.get(0));
-        tv_rub_sell.setText(rub.get(1));
-
-
+        tv_usd_buy.setText(usd.get(0).toString());
+        tv_usd_sell.setText(usd.get(1).toString());
+        tv_eur_buy.setText(eur.get(0).toString());
+        tv_eur_sell.setText(eur.get(1).toString());
+        tv_rub_buy.setText(rub.get(0).toString());
+        tv_rub_sell.setText(rub.get(1).toString());
     }
 
-    public void setContext(Context context) {
-        this.context = context;
+    private void readXML(){
+        final MyXMLReader xmlReader = new MyXMLReader();
+        xmlReader.execute();
+        final String json;
+        DB db = new DB(getActivity());
+        try {
+            json = xmlReader.get();
+            db.setJson(json);
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
     }
-
 }

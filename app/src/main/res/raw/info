@@ -1,7 +1,10 @@
 Currency Converter 1.0
 developer: Dimka M.
 App shows:
-- work with tabs, Fragment, DialogFragment, NavigationView.
+- create tabs, Fragment, DialogFragment, NavigationView, Menu;
 - read file .txt;
 - work with styles;
-- work with the database, SharedPreferences;
+- add database and SharedPreferences;
+- add new Table in database;
+- parse XML file, create JSON and save JSON in database;
+- get json with database and show data in fragment;

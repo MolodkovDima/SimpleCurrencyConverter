@@ -1,4 +1,4 @@
-package com.example.dimka.currencyconverter.parser;
+package com.example.dimka.currencyconverter.readers;
 
 
 import android.content.Context;
@@ -7,20 +7,24 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class ReadInformation {
+public class InformationReader {
 
     private static final String filename = "info";
     private Context context = null;
 
-    public void setContext(Context context) {
+    public InformationReader(Context context) {
         this.context = context;
     }
 
     public String read() {
-        StringBuilder builder = new StringBuilder();
-        InputStream stream = context.getResources().openRawResource(
-                context.getResources().getIdentifier(filename, "raw", context.getPackageName()));
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream));
+        final StringBuilder builder = new StringBuilder();
+        final InputStream stream = context
+                .getResources()
+                .openRawResource(
+                context
+                        .getResources()
+                        .getIdentifier(filename, "raw", context.getPackageName()));
+        final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream));
         String line;
         try {
             while ((line = bufferedReader.readLine()) != null) {
